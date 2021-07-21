@@ -1,3 +1,7 @@
+//C++ PROJECT
+
+//START OF THE PROGRAM FOR HOTEL MANAGEMENT
+
 #include<iostream>
 #include<conio.h>
 #include<fstream>
@@ -110,9 +114,9 @@ void staff::main_menu()
 	{	
 		system("cls");
 		int x,y;
-		cout<<"1.  hotel staff"<<endl;
-		cout<<"2.  customer"<<endl;
-		cout<<"3.  exit"<<endl<<endl;
+		cout<<"1.  Admin"<<endl;
+		cout<<"2.  Staff"<<endl;
+		cout<<"3.  Exit"<<endl<<endl;
 		cout<<"Enter choice"<<endl;
 		cin>>x;
 		switch(x){
@@ -417,9 +421,9 @@ void hotel::rooms()
 	while(!fin.eof())
 	{
 		fin.read((char*)this,sizeof(hotel));
-		cout<<endl<<room_no<<"\t\t"<<name<<"\t\t"<<phone;
-		cout<<"\t"<<checkin_date<<"\t\t"<<checkout_date;
-		cout<<"\t\t"<<address<<endl;
+		cout<<endl<<room_no<<"\t\t"<<name;
+		cout<<"\t\t"<<phone;
+		cout<<"\t"<<checkin_date<<"\t\t"<<checkout_date<<"\t\t"<<address<<endl;
 	}
 
 	cout<<"\t\t\tPress any key to continue"<<endl;
@@ -589,10 +593,10 @@ void hotel::delete_rec(int r)
 		if(room_no==r)
 		{
 			cout<<"\n Name: "<<name;
+			cout<<"\n Address: "<<address;
 			cout<<"\n Phone No: "<<phone;
 			cout<<"\n Check in date: "<<checkin_date;
 			cout<<"\n Chech out date: "<<checkout_date;
-			cout<<"\n Address: "<<address;
 			cout<<"\n\n Do you want to delete this record(y/n): ";
 			cin>>ch;
 
@@ -657,7 +661,7 @@ void hotel::bill(int r)
 	  		if(h1.room_no>=1&&h1.room_no<=130)
 	  		cout<<"your bill = "<<2000*gap<<endl;
 	
-	  		else if (h1.room_no>=131&&h1.room_no<=170)
+	  		else if (h1.room_no>=130&&h1.room_no<=170)
   			cout<<"your bill = "<<5000*gap<<endl ;
 
 	  		else
