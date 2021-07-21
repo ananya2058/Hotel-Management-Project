@@ -1,7 +1,3 @@
-//C++ PROJECT
-
-//START OF THE PROGRAM FOR HOTEL MANAGEMENT
-
 #include<iostream>
 #include<conio.h>
 #include<fstream>
@@ -75,11 +71,10 @@ class hotel : public date
 	char name[30];
 	char address[50];
 	char phone[10];
-
+	date checkin_date;
+	date checkout_date;
 	public:
-		date checkin_date;
-		date checkout_date;
-//		void main_menu();		//to dispay the main menu
+		
 		void add();			//to book a room
 		void display(); 		//to display the customer record
 		void rooms();			//to display alloted rooms
@@ -195,10 +190,10 @@ void staff::main_menu()
 				
 				case 5: 
 				{
-					int r;
+					int ro;
 					cout<<"enter room number:"<<endl;
-					cin>>r;
-					bill(r);
+					cin>>ro;
+					bill(ro);
 					break;
 				}
 				
@@ -219,7 +214,7 @@ void staff::main_menu()
 							default:cout<<"invalid"<<endl;
 						}
 					}
-				case 7: exit(0);
+				case 7: break;
 				default:
 				{
 
@@ -300,7 +295,7 @@ void hotel::add()
 
 	if(flag)
 		cout<<"Sorry.....Room is already booked"<<endl;
-	else if(r>50)
+	else if(r>200)
 	{
 			cout<<"invalid"<<endl;
 	}
@@ -417,14 +412,14 @@ void hotel::rooms()
 	ifstream fin("Record.dat",ios::in);
 	cout<<"\n\t\t\t\tList Of Rooms Allotted"<<endl;
 	cout<<"\t\t\t\t----------------------"<<endl<<endl;
-	cout<<"Room No.\tName\t\tAddress\t\tPhone No.  \tcheck in date   \tcheck out date"<<endl;
+	cout<<"Room No.\tName\t\tPhone No.\tcheck in date\t\tcheck out date\t\tAddress"<<endl;
 
 	while(!fin.eof())
 	{
 		fin.read((char*)this,sizeof(hotel));
-		cout<<endl<<room_no<<"\t\t"<<name;
-		cout<<"\t\t"<<address<<"\t\t"<<phone;
-		cout<<"  \t"<<checkin_date<<"   \t"<<checkout_date;
+		cout<<endl<<room_no<<"\t\t"<<name<<"\t\t"<<phone;
+		cout<<"\t"<<checkin_date<<"\t\t"<<checkout_date;
+		cout<<"\t\t"<<address<<endl;
 	}
 
 	cout<<"\t\t\tPress any key to continue"<<endl;
@@ -594,10 +589,10 @@ void hotel::delete_rec(int r)
 		if(room_no==r)
 		{
 			cout<<"\n Name: "<<name;
-			cout<<"\n Address: "<<address;
 			cout<<"\n Phone No: "<<phone;
 			cout<<"\n Check in date: "<<checkin_date;
 			cout<<"\n Chech out date: "<<checkout_date;
+			cout<<"\n Address: "<<address;
 			cout<<"\n\n Do you want to delete this record(y/n): ";
 			cin>>ch;
 
@@ -638,8 +633,9 @@ void hotel::bill(int r)
 	int gap=getDifference(checkin_date,checkout_date);
 	cout<<"Check in date: "<<checkin_date<<endl;
 	cout<<"Check out date: "<<checkout_date<<endl;
+	cout<<gap<<endl;
 	ifstream f1;
-	f1.open("record.dat",ios::in|ios::binary);
+	f1.open("record.dat", ios::in);
 
 	if(!f1)
 		cout<<"cannot open";
@@ -648,21 +644,24 @@ void hotel::bill(int r)
 	{
 		f1.read((char*)&h1,sizeof (hotel));
 		while(f1)
-  		{
-  			f1.read((char*)&h1,sizeof(hotel));
+  		
+		{
+  		
+		  	f1.read((char*)&h1,sizeof(hotel));
+		
 		}
 
-    if (h1.room_no == r)
-    {
+	    if (h1.room_no == r)
+	    {
+	
+	  		if(h1.room_no>=1&&h1.room_no<=130)
+	  		cout<<"your bill = "<<2000*gap<<endl;
+	
+	  		else if (h1.room_no>=131&&h1.room_no<=170)
+  			cout<<"your bill = "<<5000*gap<<endl ;
 
-  		if(h1.room_no>=1&&h1.room_no<=30)
-  		cout<<"your bill = "<<2000*gap<<endl;
-
-  		else if (h1.room_no>=35&&h1.room_no<=45)
-  		cout<<"your bill = "<<5000*gap<<endl ;
-
-  		else
-  		cout<<"your bill = "<<7000*gap<<endl;
+	  		else
+	  		cout<<"your bill = "<<7000*gap<<endl;
   	}
 
    else
@@ -680,7 +679,7 @@ void staff::staffAdd()
 {
   system("cls");
 	int r,flag;
-	ofstream f("Record.dat",ios::app);
+	ofstream f("Record.dat",ios::out);
 
 	cout<<"Enter staff member's Details"<<endl;
 	cout<<"----------------------"<<endl<<endl;
