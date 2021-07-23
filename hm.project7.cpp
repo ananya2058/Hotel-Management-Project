@@ -546,43 +546,7 @@ void hotel::delete_rec(int r)
 
 	int flag=0;
 	char ch;
-	/*
-	ifstream fin;
-	fin.open("Record.dat", ios::in|ios::binary);
-	ofstream fout;
-	fout.open("temp.dat", ios::in|ios::binary);
-
-	while(!fin.eof())
-	{
-		fin.read((char*)this, sizeof(hotel));
-		if(fin)
-		{
-			if(room_no==r)
-			{
-				flag=1;
-				cout<<"the deleted record is "<<endl;
-				cout<<"\n Name: "<<name;
-				cout<<"\n Address: "<<address;
-				cout<<"\n Phone No: "<<phone;
-			}
-			else
-			{
-				fout.write((char*)this, sizeof(hotel));
-			}
-		}
-	}
-	fout.close();
-	fin.close();
-
-	remove("Record.dat");
 	
-	rename("temp.dat","Record.dat");
-	if (flag == 1)
-        cout << "\nrecord successfully deleted \n";
-    else
-        cout << "\nrecord not found \n";
-}*/
-
 
 	ifstream fin("Record.dat",ios::in);
 	ofstream fout("temp.dat",ios::out);
